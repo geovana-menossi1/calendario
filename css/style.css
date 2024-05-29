@@ -1,0 +1,425 @@
+* {
+    padding: 0px;
+    margin: 0px;
+  }
+  
+  html {
+    box-sizing: border-box;
+    --bgColorMenu: #1d1d27;
+    --duration: .7s;
+  }
+  
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+  
+  main {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+  }
+  
+  .conteudo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+  
+  .calendario {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    position: relative;
+    top: 20px;
+    width: 50%;
+    min-height: 800px;
+  }
+  
+  .conteudo .calendario header {
+    position: relative;
+  }
+  
+  h2 {
+    font-size: 40px;
+    text-transform: uppercase;
+    
+  }
+  
+  .btn-ant, .btn_pro {
+    position: absolute;
+    top: 50%;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    margin-top: -25px;
+    border-radius: 50%;
+    color: #000000;
+    border: 0px;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .btn-ant {
+    left: 0px;
+  }
+  
+  .btn_pro {
+    right: 0px;
+  }
+  
+  .lado{
+    position: relative;
+    left: 35px;
+  }
+  
+  table {
+    border: 0px;
+    margin-top: 50px;
+    border-collapse: collapse;
+  }
+  
+  .calendario th {
+    background: white;
+    font-weight: bold;
+    font-size: 25px;
+  }
+  
+  .calendario td {
+    border: 0px;
+    height: 100px;
+    text-align: center;
+    font-size: 20px;
+    width: 100px;
+    position: relative;
+  }
+  
+  .calendario tbody td {
+    cursor: pointer;
+  }
+  
+  .calendario tbody td:hover {
+    background: rgba(0, 173, 223, 0.8);
+    color: #f9f9f9;
+  }
+  
+  .calendario table .dia-atual {
+    background-color: #00addf;
+    color: #f9f9f9;
+  }
+  
+  .event {
+    position: relative;
+  }
+  
+  .event:after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    left: 50%;
+    bottom: 7px;
+    margin: -3.5px 0 0 -3.5px;
+    background: #00addf;
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+  }
+  
+  .event:hover::after {
+    background: #f9f9f9;
+  }
+  
+  .event.dia-atual::after {
+    background-color: #f9f9f9;
+  }
+  
+  /* Menu  */
+  .move_menu {
+    display: flex;
+    justify-content: end;
+    position: relative;
+  }
+  
+  .menu {
+    margin: 0;
+    display: flex;
+    width: 100%;
+    font-size: 1.5em;
+    padding: 0 2.85em;
+    position: fixed;
+    bottom: 0px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bgColorMenu);
+    height: 60px;
+    z-index: 1000;
+  }
+  
+  .menu__item {
+    all: unset;
+    flex-grow: 1;
+    z-index: 100;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    border-radius: 50%;
+    align-items: center;
+    will-change: transform;
+    justify-content: center;
+    padding: 0.55em 0 0.85em;
+    transition: transform var(--timeOut, var(--duration));
+  }
+  
+  .menu__item::before {
+    content: "";
+    z-index: -1;
+    width: 4.2em;
+    height: 4.2em;
+    border-radius: 50%;
+    position: absolute;
+    transform: scale(0);
+    transition: background-color var(--duration), transform var(--duration);
+  }
+  
+  .menu__item.active {
+    transform: translate3d(0, -.8em, 0);
+  }
+  
+  .menu__item.active::before {
+    transform: scale(1);
+    background-color: var(--bgColorItem);
+  }
+  
+  .icon {
+    width: 1.8em;
+    height: 1.8em;
+    stroke: white;
+    fill: transparent;
+    stroke-width: 1pt;
+    stroke-miterlimit: 10;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 400;
+  }
+  
+  .menu__item.active .icon {
+    animation: strok 1.5s reverse;
+  }
+  
+  @keyframes strok {
+    100% {
+        stroke-dashoffset: 400;
+    }
+  }
+  
+  .menu__border {
+    left: 0;
+    bottom: 99%;
+    width: 10.9em;
+    height: 2.4em;
+    position: absolute;
+    clip-path: url(#menu);
+    will-change: transform;
+    background-color: var(--bgColorMenu);
+    transition: transform var(--timeOut, var(--duration));
+  }
+  
+  @media screen and (max-width: 50em) {
+    .menu {
+        font-size: .8em;
+    }
+  }
+  
+  .background-up {
+    position: fixed;
+    top: -20vmin;
+    left: -20vmin;
+    width: 70vmin;
+    height: 70vmin;
+    border-radius: 50%;
+    background: #65c8ff;
+    animation: backgroundUpAnimation 10s infinite alternate;
+  }
+  
+  .background-down {
+    position: fixed;
+    bottom: -20vmin;
+    right: -20vmin;
+    width: 70vmin;
+    height: 70vmin;
+    border-radius: 50%;
+    background: #143d81;
+    animation: backgroundDownAnimation 10s infinite alternate;
+  }
+  
+  
+  /* Cadastro */
+  
+  .container{
+    width: 500px!important; 
+    height: 500px;
+    background: #F8F9FD;
+    position: relative;
+    bottom: 20px;
+    background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+    border-radius: 32px; 
+    padding: 20px 28px;
+    border: 4px solid rgb(255, 255, 255); 
+    box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 24px 24px -16px; 
+    margin: 16px;
+  }
+  .sas{
+    background-color: #fff!important;
+    width: 60%;
+    min-height: 500px;
+    height: auto;
+    z-index: 1000;
+  }
+  
+  .heading {
+    text-align: center;
+    font-weight: 900;
+    font-size: 40px;
+    color: rgb(16, 137, 211);
+  }
+  
+  .form .input {
+    width: 100%;
+    height: 48px;
+    background: white;
+    border: none;
+    padding: 16px 20px; 
+    border-radius: 16px; 
+    margin-top: 48px;
+    font-size: 32px;
+    box-shadow: #cff0ff 0px 8px 8px -4px;
+    border-inline: 2px solid transparent;
+  }
+  
+  .form .input::-moz-placeholder {
+    color: rgb(170, 170, 170);
+  }
+  
+  .form .input::placeholder {
+    color: rgb(170, 170, 170);
+  }
+  
+  .form .input:focus {
+    outline: none;
+    border-inline: 2px solid #12B1D1;
+  }
+  
+  .form .forgot-password {
+    display: block;
+    margin-top: 8px; 
+    margin-left: 8px;
+  }
+  
+  .form .forgot-password a {
+    font-size: 24px; 
+    color: #0099ff;
+    text-decoration: none;
+  }
+  
+  .form .login-button {
+    display: block;
+    width: 100%;
+    height: 48px;
+    font-weight: bold;
+    background: linear-gradient(45deg, rgb(16, 137, 211) 0%, rgb(18, 177, 209) 100%);
+    color: white;
+    padding-block: 12px; 
+    margin: 32px auto;
+    border-radius: 16px; 
+    box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 16px 8px -12px; 
+    border: none;
+    transition: all 0.2s ease-in-out;
+    font-size: 24px;
+  }
+  
+  .form .login-button:hover {
+    transform: scale(1.03);
+    box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 18px 8px -16px; 
+  }
+  
+  .form .login-button:active {
+    transform: scale(0.95);
+    box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 12px 8px -8px;
+  }
+  
+  .social-account-container {
+    margin-top: 20px; 
+  }
+  
+  .social-account-container .title {
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    color: rgb(170, 170, 170);
+  }
+  
+  .social-account-container .social-accounts {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 12px; 
+    margin-top: 28px; 
+  }
+  .social-account-container .social-accounts .social-button {
+    background: linear-gradient(45deg, rgb(0, 0, 0) 0%, rgb(112, 112, 112) 100%);
+    border: 4px solid white; 
+    padding: 4px; 
+    border-radius: 40%; 
+    width: 80px;
+    aspect-ratio: 1;
+    display: grid;
+    place-content: center;
+    box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 9.6px 8px -6.4px; 
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .social-account-container .social-accounts .social-button .svg {
+    fill: white;
+    margin: auto;
+    font-size: 32px; 
+  }
+  
+  .social-account-container .social-accounts .social-button:hover {
+    transform: scale(1.2);
+  }
+  
+  .social-account-container .social-accounts .social-button:active {
+    transform: scale(0.9);
+  }
+  
+  .tabela-eventos {
+    width: 100%;
+    font-size: 32px; 
+    margin-top: 80px; 
+  }
+  
+  .lista {
+    border: 1px solid #666666;
+    height: 80px; 
+  }
+  
+  .tarefa {
+    margin-top: 16px; 
+  }
+  .form .textarea {
+    width: 100%;
+    height: 100px;
+    background: white;
+    border: none;
+    padding: 0px 20px; 
+    border-radius: 16px; 
+    margin-top: 48px;
+    font-size: 32px;
+    box-shadow: #cff0ff 0px 8px 8px -4px;
+    border-inline: 2px solid transparent;
+  }
