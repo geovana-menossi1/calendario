@@ -23,11 +23,15 @@ if (!isset($_SESSION['email_usuario'])) {
     <main class="pai">
 
     <div class="conteudo">
-            <div class="container">
+            <div class="container" style="height: 600px">
                 <div class="heading">Adicionar uma nova tarefa</div>
                 <form action="../back/newTarefa.php" class="form" method="post">
                     <input required class="input" type="text" name="nome" id="nome" placeholder="Evento">
-                    <input required class="input" type="date" name="data" id="data" placeholder="dia">
+                    <?php
+                    $date = isset($_GET['date']) ? $_GET['date'] : '';
+                    ?>
+                    <input required class="input" type="date" name="data" id="data" placeholder="dia" value="<?php echo $date; ?>">
+
                     <input required class="input" type="time" name="time" id="time" placeholder="time">
                     <textarea required class="textarea" name="descricao" placeholder="Descrição"></textarea>
                     <input class="login-button" type="submit" value="Cadastrar">

@@ -17,7 +17,6 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
-// Verificar se um evento deve ser atualizado
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_evento']) && $_POST['update_evento'] == "1") {
     $evento_id = $mysqli->real_escape_string($_POST['id_evento']);
     $nome_evento = $mysqli->real_escape_string($_POST['nome_evento']);
@@ -29,7 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_evento']) && $_
     if ($stmt_update) {
         $stmt_update->bind_param('sssi', $nome_evento, $data_evento, $descricao_evento, $evento_id);
         if ($stmt_update->execute()) {
-            header("Location: update_event.php?id=" . $evento_id);
+            header("Location: tarefa.php?id=" . $evento_id);
+
             exit();
         } else {
             echo "Erro ao atualizar o evento: " . $stmt_update->error;

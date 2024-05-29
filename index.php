@@ -58,7 +58,7 @@ if (!isset($_SESSION['email_usuario'])) {
         $numDays = getDaysInMonth($month, $year);
         $monthName = getMonthName($month);
         $dayOfWeek = date('N', $firstDayOfMonth);
-        $dayOfWeek = ($dayOfWeek == 7) ? 0 : $dayOfWeek; // Ajuste para a semana começar no domingo
+        $dayOfWeek = ($dayOfWeek == 7) ? 0 : $dayOfWeek;
 
         echo "<div class='calendario'>";
         echo "<header>";
@@ -79,8 +79,7 @@ if (!isset($_SESSION['email_usuario'])) {
                 echo "</tr><tr>";
                 $dayOfWeek = 0;
             }
-            // Adicione o link em torno do dia
-            echo "<td><a href='pages/list.php?day=$day' class='dia'>$day</a></td>";
+            echo "<td><a href='pages/lista.php?date=$year-$month-$day' class='dia'>$day</a></td>";
             $dayOfWeek++;
         }
 
